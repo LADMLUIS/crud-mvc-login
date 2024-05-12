@@ -12,10 +12,15 @@ $model = new GeneralModel();
 $controller = new GeneralController($model);
 // Needed vars
 $method = $_SERVER["REQUEST_METHOD"];
-$table = $_GET['table'];
+$table =null;
+if ( isset( $_GET['table'] ) ){
+    $table = $_GET['table'];
+} else {
+    header('Location: view/login.php');
+}
 
 
-if ($method == "GET") {
+if ($method == "GET" && !empty($table)) {
     $id = $_GET['id'];
     if ($table == "register" && isset($_GET['action'])) {
         $action = $_GET['action'];
